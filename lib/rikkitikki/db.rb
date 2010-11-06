@@ -2,14 +2,20 @@ module RikkiTikki
   
   class Db
     
-    def initialize
+    def initialize(start_time="08:30:00", stop_time="18:30:00")
       DataMapper::Logger.new($stdout, :debug)
       DataMapper.setup(:default, 'sqlite:rikkitikki.db')
       DataMapper.auto_upgrade!
+      @start_time = start_time
+      @stop_time = stop_time
     end
     
-    def get_unsaved
-      Record.all(:is_saved => 0)
+    def get_unsaved(date)
+      start = "#{date.year}-#{date.month}-#{date.day} #{@start_time}"
+      stop = "#{date.year}-#{date.month}-#{date.day} #{@stop_time}"
+      
+      #Record.all(:created_at.gte => "2010-11-04 00:00:00")
+      Record.all(:is_saved => 0, :created_at.gte => start, :created_at.lte => stop)
     end
     
     def get_or_create_project(project)

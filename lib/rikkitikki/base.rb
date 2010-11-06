@@ -15,12 +15,35 @@ module RikkiTikki
       usec/1_000_000/60
     end
     
-    def save
-      unsaved = @db.get_unsaved
-      unsaved.each_with_index do |record, i|
-        minutes = self.get_delta(record, unsaved[i+1])
-        info "Min #{minutes}"
+    def make_project_list
+      @projects = Hash.new
+      prjs = Project.all
+      prjs.each do |prj|
+        @projects[prj.git_name] = 0
       end
+      @projects
+    end
+    
+    def save(date=Date.today)
+      make_project_list
+      info "Projects #{@projects.inspect}"
+      unsaved = @db.get_unsaved(date)
+      
+      unsaved.each_with_index do |record, i|
+        
+        if (i+1) < unsaved.count
+          minutes = self.get_delta(record, unsaved[i+1])
+          next if minutes < 5
+          @projects[record.project.git_name] += minutes
+          info "Date #{record.created_at} Min #{minutes}"
+        end
+      
+      end
+      
+      @projects.sort.each do |project, time|
+        info "#{project}:#{time/60.to_f}"
+      end
+
     end
     
     def go

@@ -9,4 +9,11 @@ class Project
   
   has n, :records
   
+  attr_accessor :time
+  
+  def initialize(*args)
+    self.time = 0 if not args[:time]
+    super
+  end
+  
 end
