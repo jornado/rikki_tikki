@@ -6,11 +6,12 @@ require 'dm-timestamps'
 require 'dm-migrations'
 require 'lib/models'
 require 'lib/stats'
+require 'lib/rikki_tikki'
 require 'json'
 
 configure :development do
   env = 'development'
-  config = YAML.load_file( 'config/craigshist.yml' )
+  config = YAML.load_file( 'config/app.yml' )
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/#{config[env]['database']}")
   DataMapper.auto_upgrade!
 end
