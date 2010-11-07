@@ -1,0 +1,7 @@
+development:
+  database: craigshist.db
+  listings_url: http://portland.craigslist.org/search/apa/mlt?query=&srchType=A&minAsk=&maxAsk=&bedrooms=1
+  base_url: http://portland.craigslist.org/mlt/apa/
+  test_html: ../tmp/test.html
+  num_bedrooms: 1br
+  debug: true

@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+   "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title><%= @page_title %></title>
+    <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen, projection">
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.5.3/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/js/jquery.flot.min.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+</head>
+<body>
+
+<div class="container">
+	<div id="title">
+		<h1>Craigshist</h1>
+		<h2>A little webapp for <a href="/">mapping</a> and <a href="/list">listing</a> apartment price ranges by zipcode in Portland, OR.</h2>
+		
+	</div>
+	<div id="content">
+	<%= yield %>
+	</div>
+
+</div>
+
+</body>
+</html>

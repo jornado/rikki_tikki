@@ -1,0 +1,11 @@
+What this does is scrape Craigslist's apartment listings for the desired type specified in the config (1 bedrooms, in this example). Next it uses Yahoo's Geocoding API to determine the zipcode for each address. These it stores in a sqlite database. 
+
+You can take a look at the listings culled at /list or you can view the map at /. The map shows a marker for each zipcode pulled from the listings. When clicked, the marker pulls up the number of listings culled for that zipcode, along with a histogram of the prices themselves.
+
+The histogram is called into the infowindow via ajax. The prices are pulled from the db, then normalized, before being formatted for the chart.
+
+sudo rake install_dependencies will install the dependencies for the app. To pull new listings into the db, run script/parse_listings.rb.
+
+* TODO Zipcode boundaries -- data can be downloaded by state from http://www.census.gov/geo/www/cob/z52000.html#ascii
+* Rubystats: http://rubyforge.org/frs/?group_id=1227&release_id=23639
+

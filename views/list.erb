@@ -1,0 +1,9 @@
+
+<% @listings.each_with_index do |listing, i| %>
+	
+	<div class="list price <%= cycle(i) %>">$<%= listing.price %></div>
+	<div class="list address <%= cycle(i) %>"><a href="http://maps.google.com/?q=loc:<%= escape_html(listing.address) %>"><%= listing.address %><% if listing.zip_code %> <%= listing.zip_code.zip_code %><% end %></a></div>
+  	<div class="list title <%= cycle(i) %>"><a href="/show/<%= listing.id %>"><%= listing.title %></a></div>
+	<br class="list clear"/>
+<% end %>
+
