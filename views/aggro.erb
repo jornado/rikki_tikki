@@ -1,0 +1,10 @@
+<h3><%= @date.mon %>-<%= @date.day %>-<%= @date.year %></h3>
+
+<table>
+<% @projects.each_with_index do |key, i| %>
+<tr>
+	<td><%= key[0] %> - <%= sprintf("%2f", key[1]/60.to_f) %> hours</td>
+</tr>
+<% end %>
+</table>
+Total: <%= (@projects.inject(0) {|sum, value| sum+value[1]})/60.to_f %> hours

@@ -12,7 +12,7 @@ class Project
   attr_accessor :time
   
   def initialize(*args)
-    self.time = 0 if not args[:time]
+    self.time = 0 if not args and not args[:time]
     super
   end
   

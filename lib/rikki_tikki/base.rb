@@ -25,6 +25,7 @@ module RikkiTikki
     end
     
     def save(date=Date.today)
+			@date = date
       make_project_list
       info "Projects #{@projects.inspect}"
       unsaved = @db.get_unsaved(date)
@@ -40,10 +41,15 @@ module RikkiTikki
       
       end
       
-      @projects.sort.each do |project, time|
-        info "#{project}:#{time/60.to_f}"
-      end
+			@projects.reject!{|key, value| key =~ /ps \-Af/}
+			@projects.reject!{|key, value| key =~ /#{@@MATCH_STRING}/}
+			@projects.reject!{|key, value| key.nil?}
+			@projects.reject!{|key, value| value==0}
+      #@projects.sort.each do |project, time|
+      #  info "#{project}:#{time/60.to_f}"
+      #end
 
+			@projects
     end
     
     def go
@@ -57,17 +63,20 @@ module RikkiTikki
     end
   
     def grep_process
-      ps = `ps -Af | grep '#{@@MATCH_STRING}'`
+      ps_match = ""
+			ps = `ps -Af | grep '#{@@MATCH_STRING}'`
+			info "ps (#{ps})"
       ps.chomp!
       lines = ps.split("\n")
       
       lines.each do |line|
         if line !~ /grep/
-          ps = line
+          ps_match = line
+					info "Found match: #{ps_match}"
         end
       end
       
-      ps =~ /([^\/]+?)$/
+      ps_match =~ /([^\/]+?)$/
       
       return $1
     end

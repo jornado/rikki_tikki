@@ -2,28 +2,5 @@
 <div class="list right"><%= @listing.title %></div>
 <br class="clear"/>
 
-<div class="list left">Price:</div>
-<div class="list right">$<%= @listing.price %></div>
-<br class="clear"/>
 
-<div class="list left">Date:</div>
-<div class="list right"><%= @listing.listing_date %></div>
-<br class="clear"/>
-
-<div class="list left">Area:</div>
-<div class="list right"><%= @listing.area.location %></div>
-<br class="clear"/>
-
-<div class="list left">Address:</div>
-<div class="list right"><a href="http://maps.google.com/?q=loc:<%= escape_html(@listing.address) %>"><%= @listing.address %> <%= @listing.zip_code.zip_code %></a></div>
-<br class="clear"/>
-
-<div class="list left">Original Listing:</div>
-<div class="list right"><a href="<%= @listing.url %>"><%= @listing.url %></a></div>
-<br class="clear"/>
-
-<div class="list left">Content:</div>
-<div class="list right">&nbsp;</div>
-<br class="clear"/>
-<div><%= strip_html(@listing.content) %></div>
 
