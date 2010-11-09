@@ -56,7 +56,7 @@ end
 
 get '/aggro' do
 	rikki = RikkiTikki::Base.new
-  @date = Date.today-1
+	@date = params[:date] ? (eval(params[:date]) if params[:date] =~ /Date\.[-a-z0-9]+/) : Date.today-1
   @projects = rikki.save(@date)
 	erb :'aggro'
 end
