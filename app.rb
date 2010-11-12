@@ -42,7 +42,7 @@ end
 
 # ROUTES
 get '/' do
-  erb :index, :layout => true
+  redirect '/aggro'
 end
 
 get '/show/:id' do
