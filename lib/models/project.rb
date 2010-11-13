@@ -4,7 +4,7 @@ class Project
   property :id, Serial 
   property :name, String
   property :git_name, String
-  property :tick_id, Integer
+  property :tick_id, Integer, :default => 0
   property :created_at, DateTime
   
   has n, :records
@@ -16,4 +16,12 @@ class Project
     super
   end
   
+	def namify
+		if self.name.nil?
+			self.git_name.split(/[-_]/).each{|x| x.capitalize}.join " "
+		else
+			self.name
+		end
+	end
+	
 end

@@ -5,6 +5,10 @@
 	<td><%= record.project.git_name %></td>
 	<td><%= record.created_at %></td>
 	<td><%= record.is_saved %></td>
+	<td><A HREF="#" onClick="document.record_destroy_<%= record.id %>.submit();return false">delete</A></td>
+	<FORM METHOD="POST" NAME="record_destroy_<%= record.id %>" action="/records/destroy">
+	<INPUT TYPE="HIDDEN" NAME="id" VALUE="<%= record.id %>">
+	</FORM>
 </tr>
 <% end %>
 </table>

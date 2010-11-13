@@ -27,7 +27,7 @@ module RikkiTikki
     def save(date=Date.today)
 			@date = date
       make_project_list
-      info "Projects #{@projects.inspect}"
+      #info "Projects #{@projects.inspect}"
       unsaved = @db.get_unsaved(date)
       
       unsaved.each_with_index do |record, i|
@@ -36,7 +36,7 @@ module RikkiTikki
           minutes = self.get_delta(record, unsaved[i+1])
           next if minutes < 5
           @projects[record.project.git_name] += minutes
-          info "Date #{record.created_at} Min #{minutes}"
+          #info "Date #{record.created_at} Min #{minutes}"
         end
       
       end

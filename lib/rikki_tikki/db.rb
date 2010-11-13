@@ -6,7 +6,7 @@ module RikkiTikki
       DataMapper::Logger.new($stdout, :debug)
 		  env = 'development'
 		  config = YAML.load_file( "#{Dir.pwd}/config/app.yml" )
-		  DataMapper::setup(:default, "sqlite3:#{config[env]['database']}")    
+		  DataMapper::setup(:default, "sqlite3:#{confit.database}")    
       DataMapper.auto_upgrade!
       @start_time = start_time
       @stop_time = stop_time

@@ -1,24 +1,29 @@
 require 'rubygems'
 require 'sinatra'
 require 'sqlite3'
+
 require 'dm-core'
 require 'dm-timestamps'
 require 'dm-migrations'
+require 'dm-validations'
+
 require 'sinatra_messages'
 require 'rack'
 require 'rack-flash'
+require 'tickspot'
+require 'confit'
 
 Dir.glob(File.join('.', 'lib', '**/*.rb')).each { |f| require f }
 
-include Sinatra::MessagesHelper
 use Rack::Session::Cookie
 use Rack::Flash
 
+include Sinatra::MessagesHelper
+include Confit
+
 configure :development do
   env = 'development'
-  config = YAML.load_file( 'config/app.yml' )
-  DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/#{config[env]['database']}")
-  DataMapper.auto_upgrade!
+	confit('./config/app.yml')
 end
 
 # set utf-8 for outgoing
@@ -27,7 +32,7 @@ before do
 end
 
 helpers do
-  
+	
   def cycle(index)
     if index % 2 == 0
       return 'even'
@@ -82,6 +87,27 @@ post '/projects/destroy' do
 	@project.destroy!
 	
 	redirect('/projects')
+end
+
+post '/records/destroy' do
+	@record = Record.get(params[:id])
+	@record.destroy!
+	flash[:notice] = "Record has been deleted"
+
+	redirect('/records')
+end
+
+post '/projects/update' do
+	@project = Project.get(params[:id])
+	@project.update!(params[:project])
+	@project.save!
+	puts @project.public_methods.sort
+	if @project.valid?
+		redirect("/projects")
+	else
+		flash[:error] = "Please correct the following errors: #{@project.errors.inspect}"
+		erb :'projects/edit'
+	end
 end
 
 get '/projects' do
