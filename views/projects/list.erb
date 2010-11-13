@@ -1,0 +1,17 @@
+<table>
+<% @projects.each_with_index do |project, i| %>
+
+<tr>
+	
+	<td><%= project.git_name %></td>
+	<td><%= project.name %></td>
+	<td><%= project.tick_id %></td>
+	<td><a href="/projects/edit/<%= project.id %>">edit</a></td>
+	<td><A HREF="#" onClick="document.destroy_<%= project.id %>.submit();return false">delete</A></td>
+	<FORM METHOD="POST" NAME="destroy_<%= project.id %>" action="/projects/destroy">
+	<INPUT TYPE="HIDDEN" NAME="id" VALUE="<%= project.id %>">
+	</FORM>
+
+</tr>
+<% end %>
+</table>

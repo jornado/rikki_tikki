@@ -5,8 +5,14 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-migrations'
 require 'sinatra_messages'
+require 'rack'
+require 'rack-flash'
+
 Dir.glob(File.join('.', 'lib', '**/*.rb')).each { |f| require f }
+
 include Sinatra::MessagesHelper
+use Rack::Session::Cookie
+use Rack::Flash
 
 configure :development do
   env = 'development'
@@ -45,7 +51,14 @@ get '/' do
   redirect '/aggro'
 end
 
-get '/show/:id' do
+get '/aggro' do
+	rikki = RikkiTikki::Base.new
+	@date = params[:date] ? (eval(params[:date]) if params[:date] =~ /Date\.[-a-z0-9]+/) : Date.today-1
+  @projects = rikki.save(@date)
+	erb :'aggro'
+end
+
+get '/records/show/:id' do
   @listing = Record.get(params[:id])
   if @listing
     erb :show
@@ -54,14 +67,29 @@ get '/show/:id' do
   end
 end
 
-get '/aggro' do
-	rikki = RikkiTikki::Base.new
-	@date = params[:date] ? (eval(params[:date]) if params[:date] =~ /Date\.[-a-z0-9]+/) : Date.today-1
-  @projects = rikki.save(@date)
-	erb :'aggro'
+get '/projects/edit/:id' do
+	@project = Project.get(params[:id])
+	erb :'projects/edit'
 end
 
-get '/list' do
+post '/projects/destroy' do
+	@project = Project.get(params[:id])
+	@project.records.each do |record|
+		record.destroy!
+	end
+	flash[:notice] = "#{@project.git_name} has been deleted"
+	@project.save!
+	@project.destroy!
+	
+	redirect('/projects')
+end
+
+get '/projects' do
+  @projects = Project.all()
+  erb :'projects/list'
+end
+
+get '/records' do
   @records = Record.all()
-  erb :list
+  erb :'records/list'
 end
