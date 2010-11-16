@@ -21,7 +21,7 @@ use Rack::Flash
 include Sinatra::MessagesHelper
 
 configure :development do
-	confit('/work/sc/rikki_tikki/config/app.yml', nil, true)
+	confit('./config/app.yml', 'development', true)
   DataMapper::Logger.new($stdout, :debug)
   DataMapper::setup(:default, "sqlite3:#{confit.database}")    
   DataMapper.auto_upgrade!
