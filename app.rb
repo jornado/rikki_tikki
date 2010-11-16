@@ -19,11 +19,12 @@ use Rack::Session::Cookie
 use Rack::Flash
 
 include Sinatra::MessagesHelper
-include Confit
 
 configure :development do
-  env = 'development'
-	confit('./config/app.yml')
+	confit('/work/sc/rikki_tikki/config/app.yml', nil, true)
+  DataMapper::Logger.new($stdout, :debug)
+  DataMapper::setup(:default, "sqlite3:#{confit.database}")    
+  DataMapper.auto_upgrade!
 end
 
 # set utf-8 for outgoing
@@ -57,9 +58,9 @@ get '/' do
 end
 
 get '/aggro' do
-	rikki = RikkiTikki::Base.new
+  @rikki = RikkiTikki::Base.new
 	@date = params[:date] ? (eval(params[:date]) if params[:date] =~ /Date\.[-a-z0-9]+/) : Date.today-1
-  @projects = rikki.save(@date)
+  @projects = @rikki.save(@date)
 	erb :'aggro'
 end
 
