@@ -16,7 +16,7 @@ def main
   while 1 do
     rikki = RikkiTikki::Base.new
     rikki.go
-    Kernel.sleep(5*60)
+    Kernel.sleep(1*60)
   end
 end
 
