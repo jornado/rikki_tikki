@@ -1,4 +1,4 @@
-<h3><%= @date.mon %>-<%= @date.day %>-<%= @date.year %></h3>
+<h3><%= day_of_week(@date.wday) %> <%= @date.mon %>-<%= @date.day %>-<%= @date.year %></h3>
 
 <table>
 <% @projects.each_with_index do |key, i| %>

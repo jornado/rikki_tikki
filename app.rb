@@ -1,3 +1,4 @@
+require 'config/env'
 require 'rubygems'
 require 'sinatra'
 require 'sqlite3'
@@ -19,6 +20,8 @@ use Rack::Session::Cookie
 use Rack::Flash
 
 include Sinatra::MessagesHelper
+
+WEEKDAYS = %w{Sunday Monday Tuesday Wednesday Thursday Friday Saturday} 
 
 configure :development do
 	confit('./config/app.yml', 'development', true)
@@ -48,6 +51,10 @@ helpers do
   
   def escape_html(string)
     CGI::escape(string)
+  end
+  
+  def day_of_week(idx)
+    WEEKDAYS[idx]
   end
   
 end

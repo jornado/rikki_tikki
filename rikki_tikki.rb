@@ -1,3 +1,4 @@
+require 'config/env'
 require 'rubygems'
 require 'confit'
 require 'sinatra_messages'

@@ -34,7 +34,7 @@ module RikkiTikki
         
         if (i+1) < unsaved.count
           minutes = self.get_delta(record, unsaved[i+1])
-          next if minutes < 5
+          next if minutes < 1
           @projects[record.project.git_name] += minutes
           #info "Date #{record.created_at} Min #{minutes}"
         end
