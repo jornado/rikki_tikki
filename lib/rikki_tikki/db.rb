@@ -4,7 +4,7 @@ module RikkiTikki
     
     def initialize(start_time="09:00:00", stop_time="18:00:00")
       DataMapper::Logger.new($stdout, :debug)
-		  DataMapper::setup(:default, "sqlite3:#{confit.database}")    
+		  DataMapper::setup(:default, "sqlite3:#{confit.app.database}")    
       DataMapper.auto_upgrade!
       @start_time = start_time
       @stop_time = stop_time
@@ -20,10 +20,10 @@ module RikkiTikki
     def get_or_create_project(project)
       existing = Project.first(:git_name => project)
       if existing
-        info "#{project} exists!"
+        puts "#{project} exists!"
         return existing
       else
-        info "New project! #{project}"
+        puts "New project! #{project}"
         return Project.create(:git_name => project)
       end
     end

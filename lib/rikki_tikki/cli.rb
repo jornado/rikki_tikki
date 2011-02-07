@@ -64,14 +64,14 @@ module RikkiTikki
         
       if parsed_options? && arguments_valid? 
       
-        info "Start at #{DateTime.now}\n\n" if @options.verbose
+        puts "Start at #{DateTime.now}\n\n" if @options.verbose
       
         output_options if @options.verbose # [Optional]
             
         process_arguments            
         process_command
       
-        info "\nFinished at #{DateTime.now}" if @options.verbose
+        puts "\nFinished at #{DateTime.now}" if @options.verbose
       
       else
         output_usage
@@ -103,10 +103,10 @@ module RikkiTikki
       end
     
       def output_options
-        info "Options:\n"
+        puts "Options:\n"
       
         @options.marshal_dump.each do |name, val|        
-          info "  #{name} = #{val}"
+          puts "  #{name} = #{val}"
         end
       end
 
@@ -131,7 +131,7 @@ module RikkiTikki
       end
     
       def output_version
-        info "#{File.basename(__FILE__)} version #{VERSION}"
+        puts "#{File.basename(__FILE__)} version #{VERSION}"
       end
     
       def process_command

@@ -1,18 +1,16 @@
-require 'config/env'
-require 'rubygems'
-require 'sinatra'
-require 'sqlite3'
-
+#require 'config/env'
+require "rubygems"
 require 'dm-core'
 require 'dm-timestamps'
 require 'dm-migrations'
 require 'dm-validations'
-
-require 'sinatra_messages'
-require 'rack'
 require 'rack-flash'
 require 'tickspot'
+require 'httparty'
 require 'confit'
+require 'dm-sqlite-adapter'
+require 'sinatra'
+require 'sqlite3'
 
 Dir.glob(File.join('.', 'lib', '**/*.rb')).each { |f| require f }
 

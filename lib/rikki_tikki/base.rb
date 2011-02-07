@@ -27,7 +27,7 @@ module RikkiTikki
     def save(date=Date.today)
 			@date = date
       make_project_list
-      #info "Projects #{@projects.inspect}"
+      #puts "Projects #{@projects.inspect}"
       unsaved = @db.get_unsaved(date)
       
       unsaved.each_with_index do |record, i|
@@ -36,7 +36,7 @@ module RikkiTikki
           minutes = self.get_delta(record, unsaved[i+1])
           next if minutes < 1
           @projects[record.project.git_name] += minutes
-          #info "Date #{record.created_at} Min #{minutes}"
+          #puts "Date #{record.created_at} Min #{minutes}"
         end
       
       end
@@ -46,7 +46,7 @@ module RikkiTikki
 			@projects.reject!{|key, value| key.nil?}
 			@projects.reject!{|key, value| value==0}
       #@projects.sort.each do |project, time|
-      #  info "#{project}:#{time/60.to_f}"
+      #  puts "#{project}:#{time/60.to_f}"
       #end
 
 			@projects
@@ -57,7 +57,7 @@ module RikkiTikki
       #@cli.run
       
       @git_name = self.grep_process
-      info "Processing #{@git_name}"
+      puts "Processing #{@git_name}"
       existing = @db.get_or_create_project(@git_name)
       record = @db.insert_record(existing)
     end
@@ -65,14 +65,14 @@ module RikkiTikki
     def grep_process
       ps_match = ""
 			ps = `ps -Af | grep '#{@@MATCH_STRING}'`
-			info "ps (#{ps})"
+			puts "ps (#{ps})"
       ps.chomp!
       lines = ps.split("\n")
       
       lines.each do |line|
         if line !~ /grep/
           ps_match = line
-					info "Found match: #{ps_match}"
+					puts "Found match: #{ps_match}"
         end
       end
       
