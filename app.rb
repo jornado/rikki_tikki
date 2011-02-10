@@ -17,14 +17,13 @@ Dir.glob(File.join('.', 'lib', '**/*.rb')).each { |f| require f }
 use Rack::Session::Cookie
 use Rack::Flash
 
-include Sinatra::MessagesHelper
 
 WEEKDAYS = %w{Sunday Monday Tuesday Wednesday Thursday Friday Saturday} 
 
 configure :development do
 	confit('./config/app.yml', 'development', true)
   DataMapper::Logger.new($stdout, :debug)
-  DataMapper::setup(:default, "sqlite3:#{confit.database}")    
+  DataMapper::setup(:default, "sqlite3:#{confit.app.database}")    
   DataMapper.auto_upgrade!
 end
 
