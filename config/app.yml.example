@@ -1,3 +1,0 @@
-development:
-  database: rikki_tikki.db
-  debug: true
