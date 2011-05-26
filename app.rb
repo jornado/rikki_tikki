@@ -1,6 +1,8 @@
 class App < Sinatra::Base
 
+
   before do
+    DataMapper.auto_upgrade!
     puts params.inspect
   end
 
