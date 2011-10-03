@@ -1,0 +1,6 @@
+jo_dev:
+  adapter: postgres
+  host: localhost
+  username: poeks
+  password:
+  database: rikki_tikki

@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require 'commander/import'
+require File.join('.', 'config', 'env')
+
+program :name, 'Rikki Tikki'
+program :version, '1.0.0'
+program :description, 'A CLI for timing your times.'
+
+command :run do |c|
+  c.syntax = 'bin/rikki run'
+  c.description = 'Runs task timer'
+  c.action do |args, options|
+    r = Rikki.new(confit.app.debug)
+    r.run
+  end
+end
+
+command :show do |c|
+  c.syntax = 'bin/rikki show [day]'
+  c.description = 'Show times for day or date'
+  c.action do |args, options|
+    r = Rikki.new(confit.app.debug)
+    r.show(ARGV[1])
+  end
+end

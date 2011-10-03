@@ -1,12 +1,11 @@
 require 'rubygems'
-require File.join('.', 'config', 'env.rb')
 
 namespace :db do
 
-  desc "Init db"
+  desc "bootstrap db"
   task :bootstrap do
-    puts "Bootstrapping database."
+    require File.join('.', 'config', 'env.rb')
     DataMapper.auto_migrate!
   end
-  
+
 end

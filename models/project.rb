@@ -1,27 +1,12 @@
 class Project
   include DataMapper::Resource
-
-  property :id, Serial 
-  property :name, String
-  property :git_name, String
-  property :tick_id, Integer, :default => 0
-  property :created_at, DateTime
   
-  has n, :records
+  property :id, Serial, :index => true
+  property :name, String, :required => true, :index => true, :length => 100
+  property :jobcode, String, :required => false, :length => 100
+  property :created_at, DateTime, :index => true
+  property :updated_at, DateTime
   
-  attr_accessor :time
+  has n, :blocks
   
-  def initialize(*args)
-    self.time = 0 if not args and not args[:time]
-    super
-  end
-  
-	def namify
-		if self.name.nil?
-			self.git_name.split(/[-_]/).each{|x| x.capitalize}.join " "
-		else
-			self.name
-		end
-	end
-	
 end
