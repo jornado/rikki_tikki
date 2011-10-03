@@ -15,7 +15,7 @@ class Rikki
       `ps -Af | grep 'thin'`.split("\n").each do |line|
         
         if line =~ /ruby.+thin.+\-c ([^\s]+)/
-          self.current_project = self.get_project($1)
+          self.current_project = get_project($1)
           next if $1 =~ /#{confit.app.app_dir}/
           process
         else
