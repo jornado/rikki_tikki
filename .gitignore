@@ -1,4 +1,4 @@
-/rikki_tikki.db
 /config/app.yml
+/config/database.yml
 /tmp
 .DS_Store

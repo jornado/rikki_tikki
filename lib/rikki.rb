@@ -44,7 +44,7 @@ class Rikki
         project_minutes += block.get_delta
         
       end
-      log "#{project.name}\t\t#{in_hours(project_minutes)}"
+      log "#{project.name}\t\t#{in_hours(project_minutes)}" if project_minutes > 0
       
     end
   end
@@ -54,6 +54,8 @@ class Rikki
   private
   
   def in_hours(minutes)
+    minutes
+    minutes/60.to_f
     sprintf("%2f", minutes/60.to_f)
   end
   

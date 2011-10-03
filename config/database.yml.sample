@@ -1,0 +1,6 @@
+your_dev:
+  adapter: postgres
+  host: localhost
+  username: you
+  password: pass
+  database: rikki_tikki
