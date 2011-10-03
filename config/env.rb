@@ -13,5 +13,3 @@ Dir.glob(File.join('.', 'models', '**/*.rb')).each { |f| require f }
 DataMapper.finalize
 DataMapper::Logger.new(STDOUT, :debug) if confit.app.debug
 DataMapper.setup :default, YAML.load_file(File.join('.', 'config', 'database.yml'))[ENV['RACK_ENV']]
-        
-puts "Rikki Tikki started at #{Time.now}"
