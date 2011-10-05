@@ -31,6 +31,9 @@ Rikki Tikki times you times, so you don't have to. It periodically pings your co
 `alias rikki_show='cd /path/to/rikki_tikki; /path/to/rikki_tikki/bin/rikki show ${1}' `
 
 * Every morning when you boot up your computer, keep this running in terminal…
+
+`rikki_run`
+
 * When you'd like to know what you've been working on, just ask. Here are some examples:
 
 `rikki_show today`
