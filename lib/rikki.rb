@@ -54,9 +54,9 @@ class Rikki
     end
     
     puts ""
-    puts "Started at #{first_block.started_at.hour}:#{first_block.started_at.minute}".green unless not first_block
-    puts "Ended at #{last_block.ended_at.hour}:#{last_block.ended_at.minute}".green unless not last_block
-    
+    puts "Started #{first_block.started_at.strftime('at %I:%M%p')}".green unless not first_block
+    puts "Ended #{last_block.ended_at.strftime('at %I:%M%p')}".green unless not last_block
+    puts "#{in_hours get_time_delta(first_block.started_at, last_block.ended_at)} hours for #{day}".green
   end
   
   

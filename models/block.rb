@@ -10,10 +10,7 @@ class Block
   belongs_to :project
   
   def get_delta
-    delta = self.ended_at - self.started_at
-    usec = (delta * 60 * 60 * 24 * (10**6)).to_i
-    res = usec/1_000_000/60
-    #round(res)
+    get_time_delta(self.started_at, self.ended_at)
   end
   
   def round(minutes)
