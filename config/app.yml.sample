@@ -1,3 +1,4 @@
 your_dev:
   debug: false
   delay: 60*5
+	app_dir: rikki_tikki

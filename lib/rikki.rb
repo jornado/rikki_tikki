@@ -36,6 +36,11 @@ class Rikki
     
     day = Chronic.parse("#{day}").to_date
     next_day = day + 1
+    previous_day = day + 1
+    
+    first_block = Block.first(:started_at.lt => next_day, :started_at.gte => day, :order => :started_at.asc)
+    last_block = Block.first(:started_at.lt => next_day, :started_at.gte => day, :order => :started_at.desc)
+    
     Project.all.each do |project|
       
       project_minutes = 0
@@ -47,6 +52,11 @@ class Rikki
       log "#{project.name}\t\t#{in_hours(project_minutes)}" if project_minutes > 0
       
     end
+    
+    puts ""
+    puts "Started at #{first_block.started_at.hour}:#{first_block.started_at.minute}".green unless not first_block
+    puts "Ended at #{last_block.ended_at.hour}:#{last_block.ended_at.minute}".green unless not last_block
+    
   end
   
   
