@@ -25,14 +25,18 @@ Rikki Tikki times you times, so you don't have to. It periodically pings your co
 * Add an these aliases to your .profile (you don't have to, but it simplifies life, so hey):
 
 `export RACK_ENV=your_env`
+  
 `alias rikki_run='cd /path/to/rikki_tikki; /path/to/rikki_tikki/bin/rikki run' `
+
 `alias rikki_show='cd /path/to/rikki_tikki; /path/to/rikki_tikki/bin/rikki show ${1}' `
 
 * Every morning when you boot up your computer, keep this running in terminal…
 * When you'd like to know what you've been working on, just ask. Here are some examples:
 
 `rikki_show today`
+
 `rikki_show yesterday`
+
 `rikki_show 'last friday'`
 
 
