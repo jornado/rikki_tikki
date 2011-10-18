@@ -2,7 +2,7 @@ If you are as forgetful as I, you know well that remembering what you've done al
 
 ## How it works
 
-Rikki Tikki times you times, so you don't have to. It periodically pings your computers running processes, looking for the thin server. When it finds such a process, it makes a note of the directory it's running from, which happens to be the name of a git repository that maps to a project name. Handy! At the end of the day (or week, shhh), you can ask Rikki Tikki what you've been working on. It looks like this:
+Rikki Tikki times you times, so you don't have to. It periodically pings your computers running processes, looking for the thin server. When it finds such a process, it makes a note of the directory it's running from, which happens to be the name of a git repository that maps to a project name. Handy! At the end of the day (or week, shhh), you can ask Rikki Tikki what you've been working on.
 
 ## How to install it
 
@@ -31,6 +31,9 @@ Rikki Tikki times you times, so you don't have to. It periodically pings your co
 `alias rikki_show='cd /path/to/rikki_tikki; /path/to/rikki_tikki/bin/rikki show ${1}' `
 
 * Every morning when you boot up your computer, keep this running in terminal…
+
+`rikki_run`
+
 * When you'd like to know what you've been working on, just ask. Here are some examples:
 
 `rikki_show today`
