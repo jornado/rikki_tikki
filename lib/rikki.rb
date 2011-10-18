@@ -40,6 +40,8 @@ class Rikki
     
     first_block = Block.first(:started_at.lt => next_day, :started_at.gte => day, :order => :started_at.asc)
     last_block = Block.first(:started_at.lt => next_day, :started_at.gte => day, :order => :started_at.desc)
+    total_project_minutes = 0
+    total_minutes = get_time_delta(first_block.started_at, last_block.ended_at)
     
     Project.all.each do |project|
       
@@ -49,17 +51,17 @@ class Rikki
         project_minutes += block.get_delta
         
       end
+      total_project_minutes += project_minutes
       log "#{project.name}\t\t#{in_hours(project_minutes)}" if project_minutes > 0
       
     end
     
+    log "non-billable\t\t\t#{in_hours(total_minutes-total_project_minutes)}" if total_minutes > 0    
     puts ""
     puts "Started #{first_block.started_at.strftime('at %I:%M%p')}".green unless not first_block
     puts "Ended #{last_block.ended_at.strftime('at %I:%M%p')}".green unless not last_block
-    puts "#{in_hours get_time_delta(first_block.started_at, last_block.ended_at)} hours for #{day}".green
+    puts "#{in_hours total_minutes} hours for #{day}".green
   end
-  
-  
   
   private
   
